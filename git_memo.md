@@ -1,14 +1,28 @@
-Git Memo
+Git Commands
 ====================================================
 
-Git commands
+for WorkTree
 ----------------------------------------------------
-- **git init**
-    - WorkTreeのディレクトリで実行すると、そこにリポジトリが作成される
-
 - git status
     - WorkTree傘下のファイルの、登録状態を確認
 
+- **git checkout** **--** ファイル
+    - Work Treeにあるファイルを、直前にコミットした状態(Git directoryの状態)に戻す
+    - ファイル新規作成時やファイル名変更時の後など、思った通りの挙動にならない状況もある
+
+- **git init**
+    - WorkTreeのディレクトリで実行すると、そこにリポジトリが作成される
+
+- git rm ファイル/ディレクトリ
+    - 対象をWorkTreeから削除し、かつ、削除した状態をStagingAreaに登録する。
+    - Git管理下のファイル等は、この方法で削除するのが望ましい。
+    - (git rmに頼らず削除した場合は、自分でaddしてその状態を登録する必要がある)
+
+- git rm **-r** ディレクトリ
+    - 中身を持つディレクトリを削除する場合、-r optionを書く。recursive.
+
+from WrokTree to StageArea
+----------------------------------------------------
 - **git add** ファイル/ディレクトリ名
     - 対象をStagingAreaに登録
     - git add **.** で、そこにある全てを対象にする
@@ -21,24 +35,27 @@ Git commands
     - addした後のWorkTreeでどんな変更が行われたかを詳しく確認(テキストタイプ)
     - **--cached** : Staging Areaにどんな変更が登録されているか
 
+StageArea から GitDirectory へ
+----------------------------------------------------
 - **git Commit**
-    - Staging Areaへの登録状態を、Git directoryへコミット。
-    - 対応エディタが自動起動するので、3行ほどコメントを書いて保存、閉じるとコミット開始。
-    - **-m "comment"** => コマンド入力時に1行コメントを書いてしまう。
+    - Staging Areaの登録状態を、Git directoryへコミット。
+    - 対応エディタが自動起動するので、コメントを書いて保存、閉じるとコミット開始。
+    - 1行目にタイトル、2行目は空行、3行目に詳細、というコメントがいい。
+    - **-m "comment"** => コマンド入力時に1行コメントを書いて、すぐコミット。
 
-- **git checkout** **--** ファイル
-    - Work Treeにあるファイルを、直前にコミットした状態(Git directoryの状態)に戻す
-    - ファイル新規作成時やファイル名変更時の後など、思った通りの挙動にならない状況もある
+GitDirectory(ローカル)で使う
+----------------------------------------------------
+- **git log**
+    - GitDirectoryに対するコミットの履歴を見る
 
-- git rm ファイル/ディレクトリ
-    - 対象をWorkTreeから削除し、かつ、削除した状態をStagingAreaに登録する。
-    - Git管理下のファイル等は、この方法で削除するのが望ましい。
-    - (git rmに頼らず削除した場合は、自分でaddしてその状態を登録する必要がある)
+GitHub.com上の自分のリポジトリを、ローカル・リポジトリとして取得
+----------------------------------------------------
+- **git clone** address
+    - addressの値は、対象リポジトリのページの、緑ボタン[Clone or download]を押し、[Clone with SSH]の状態にして、表示されたURS。コピーアイコンを押せばクリップボードに保存される。
+    - **[Shift]+[Insert]** ： GitBash上にペーストするショートカット
+    - 実行すると、カレントにリポジトリのディレクトリが作成される。
 
-- git rm **-r** ディレクトリ
-    - 中身を持つディレクトリを削除する場合、-r optionを書く。recursive.
-
-Git config
+Git Config
 ----------------------------------------------------
 - git config --list => 設定一覧の確認
 - git config 項目名 => 項目名(user.name / user.email等)の値を見る
@@ -46,11 +63,11 @@ Git config
 - git config --global **user.email** xxxx@xxx.com => メールアドレス登録
 - git config --global **core.editor** "code --wait" => git命令中に自動起動するエディタの起動命令文
 
-ファイルの位置
+.gitconfig fileの位置
 ----------------------------------------------------
-- home directory(~)に、[.gitconfig]というユーザー用の設定ファイルが存在する。
+- home directory(~)に、[**.gitconfig**]というユーザー用の設定ファイルが存在する。
 - git config **--global** 項目名 値 => 項目に値を登録。[.gitconfig]がそのように修正される
-- 確認は、[less ~/.gitconfig] => ホーム(~)にある.gitconfigを閲覧、の意
+- 確認は、[less ~/.gitconfig] => ホーム(~)にある.gitconfigを閲覧(less)、の意
 
 Linux commands
 ----------------------------------------------------
