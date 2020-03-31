@@ -39,11 +39,15 @@
 ---
 ## Committng ( StageArea => GitDirectory )
 
-- **git Commit**
-    - Staging Areaの登録状態を、Git directoryへコミット。
-    - VScodeが自動起動する。コメントを書き、保存(ctrl+s)=>閉じる(ctrl+w)、でコミット開始。
-    - 1行目にタイトル、2行目は空行、3行目に詳細、というコメントが望ましい。
-    - **-m "hogeHoge"** => コマンド入力時に1行コメントを書いて、すぐコミット。
+- **git commit**
+    - Staging Areaの登録状態を、Git directoryへコミットする。
+        1. VScodeが自動起動する (core.edhitor = **"code --wait"** の場合)
+        1. コメントを書く
+            - 1行目にタイトル、2行目は空行、3行目に詳細、というコメントが望ましい。
+        1. 保存(ctrl+s)=>閉じる(ctrl+w)、でコミット開始
+
+- git commit **-m** **"hogeHoge"**
+    - "hogeHoge"という1行コメントで、すぐにコミット。エディタ起動なし。
 
 ---
 ## GitDirectory(ローカル)で使用するコマンド
@@ -57,14 +61,17 @@
 
 ---
 ## Git Config
+
 - git config --list => 設定一覧の確認(item名と値の組み合わせで一覧表示)
 - git config *item'sName* => そのitemの値を見る
 - git config **--global** *Item* *Value* =>項目の値を登録/変更
     - git config **--global user.name** *userName* => ユーザ名の登録/更新
     - git config **--global user.email** *mailAddress* => メールアドレス登録/更新
     - git config **--global core.editor** "code --wait" => git命令中に自動起動するエディタの起動命令文
+
 ---
 ## .gitconfig fileの位置    (~/.gitconfig)
+
 - そのユーザーのhome directory[**~**]の下に[**.gitconfig**]という設定ファイルが存在する。
 - 内容の登録/更新は上記の[git config --global item value]で行う。
 - 確認は、[less ~/.gitconfig] => ホーム(~)にある.gitconfigを閲覧(less)、の意
@@ -119,11 +126,15 @@
 
 - git **pull** *remoteRepository'sName* *branch'sName*
     - 例：git pull origin master
+        - リモートリポジトリ名originの、ブランチ名masterの内容を、ローカルリポジトリに反映し、さらにワークツリーにも反映する。
     - [リモートリポジトリ => ローカルリポジトリ => ワークツリー] まで一気に反映
 
 - git **fetch** *remoteRepository'sName*
     - 例：git fetch origin
+        - リモート・リポジトリ名originをの内容を、ローカルリポジトリに反映する
     - [リモートリポジトリ => ローカルリポジトリ] まで反映
+
+- pull = fetch + marge
 
 ---
 ## Linux commands
